@@ -15,10 +15,10 @@ export const thoughtData = [{
             }],
     },
     {
-        thoughtText: 'This is another test thought!',
+        thoughtText: 'This is the second test thought!',
         username: 'test_user2',
         reactions: [{
-                reactionBody: 'This is another test reaction',
+                reactionBody: 'This is the second test reaction',
                 username: 'test_user1',
             }],
     }

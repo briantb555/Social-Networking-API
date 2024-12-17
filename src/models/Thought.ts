@@ -33,6 +33,8 @@ const reactionSchema = new Schema<IReaction>(
         createdAt: {
             type: Date,
             default: Date.now,
+            //Use a getter method to format the timestamp on query
+            //get: (timestamp: Date) => new Date(timestamp).toLocaleString('en-US', { timeZone: 'America/New_York' }),
         },
     },
     {
@@ -50,6 +52,12 @@ const thoughtSchema = new Schema<IThought>(
             min_length: 1,
             max_length: 280,
         },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            //Use a getter method to format the timestamp on query
+            //get: (timestamp: Date) => timestamp.toLocaleString( ),
+        },
         username: {
             type: String,
             required: true,
@@ -59,11 +67,12 @@ const thoughtSchema = new Schema<IThought>(
     {
         toJSON: {
             virtuals: true,
+            getters: true,
         },
     }
 );
 
-thoughtSchema.virtual('reactionCount').get(function() {
+thoughtSchema.virtual('reactionCount').get(function(this: IThought) {
     return this.reactions.length;
 });
 
